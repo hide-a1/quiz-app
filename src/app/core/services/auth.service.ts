@@ -26,21 +26,11 @@ export class AuthService {
     });
   }
 
-  getUrl(): string {
-    let url =
-      process?.env?.['NEXT_PUBLIC_VERCEL_URL'] ?? window.location.origin;
-    // Make sure to include `https://` when not localhost.
-    url = url.includes('http') ? url : `https://${url}`;
-    // Make sure to include a trailing `/`.
-    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
-    return url;
-  }
-
   signIn() {
     return this.supabase.client.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: this.getUrl() + '/login',
+        redirectTo: window.location.origin + '/login',
       },
     });
   }
