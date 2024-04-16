@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   signIn() {
+    console.log(window.location.origin);
     return this.supabase.client.auth.signInWithOAuth({
       provider: 'google',
       options: {
